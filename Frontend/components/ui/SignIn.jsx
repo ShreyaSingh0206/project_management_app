@@ -4,104 +4,105 @@ import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
 
-  const { register, handleSubmit, watch, setError, formState: { errors}, } = useForm();
+  const { register, handleSubmit, watch, setError, formState: { errors }, } = useForm();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     let r = await fetch("http://localhost:3000/SignIn", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    credentials: "include",
-    body: JSON.stringify(data)
-  })
-  let res = await r.json();
-  alert(res.message);
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "include",
+      body: JSON.stringify(data)
+    })
+    let res = await r.json();
+    alert(res.message);
 
-   if (r.ok) {
-    navigate("/");
-  } else {
-    alert("Signin failed: " + res);
+    if (r.ok) {
+      navigate("/Dashboard");
+    } else {
+      alert("Signin failed: " + res);
+    }
+
   }
 
-}
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-    <div className='px-120 py-30'>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 border-2 border-gray-300 rounded-xl">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
+    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-cover bg-center" style={{ backgroundImage: "url('src/assets/pexels-codioful-6985048.jpg')" }}>
+      
+      <div className="w-full max-w-md space-y-10  p-15      bg-white/10 backdrop-blur-md border border-white/30 text-white  rounded-xl shadow-2xl ">
+        <div className='flex flex-col items-center'>
+          <img  src="src/assets/only_logo.png" alt="image error" srcset="" width='75px'/>
+          <h2 className="mt-6 text-center text-2xl font-bold ">
             Sign in to your account
           </h2>
         </div>
-
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          
+        <form className="mt-8 space-y-10" onSubmit={handleSubmit(onSubmit)}>
+          <div className="space-y-4">
+            {/* Email Field */}
             <div>
-              <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
+              <label htmlFor="email" className="block text-sm font-medium ">
                 Email address
               </label>
-              <div className="mt-2">
-                <input
-                {...register("email", {required: {value: true, message: "This field is required"}})}
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-                <div>{errors.email?.message}</div>
-              </div>
+              <input
+                {...register("email", { required: { value: true, message: "This field is required" } })}
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                className="mt-1 block w-full rounded-md bg-white/20 px-3 py-2 placeholder-gray-200 text-white border border-white/30 focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-white"
+              />
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+              )}
             </div>
 
+            {/* Password Field */}
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
+                <label htmlFor="password" className="block text-sm font-medium">
                   Password
                 </label>
-                <div className="text-sm">
-                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                    Forgot password?
-                  </a>
-                </div>
+                <a href="#" className="text-sm font-medium text-orange-400 hover:text-orange-500">
+                  Forgot password?
+                </a>
               </div>
-              <div className="mt-2">
-                <input
-                {...register("password", {required: {value: true, message: "This field is required"}})}
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  autoComplete="current-password"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-                <div>{errors.password?.message}</div>
-              </div>
+              <input
+                {...register("password", { required: { value: true, message: "This field is required" } })}
+                id="password"
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                className="mt-1 block w-full rounded-md bg-white/20 px-3 py-2 placeholder-gray-200 text-white border border-white/30 focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-white"
+              />
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+              )}
             </div>
+          </div>
 
-            <div className='py-6'>
-              <button
-                type="submit"
-                value='submit'
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Sign in
-              </button>
-            </div>
+          {/* Submit Button */}
+          <div>
+            <button
+              type="submit"
+              value="submit"
+              
+              className="w-full flex justify-center py-2 px-4 rounded-md bg-indigo-500 hover:bg-indigo-400 text-white font-semibold shadow-lg"
+            >
+              Sign in
+            </button>
+          </div>
+        </form>
 
-          <p className="mt-10 text-center text-sm/6 text-gray-500">
-            Not a member?{' '}
-            <a href="./SignUp" className="font-semibold text-indigo-600 hover:text-indigo-500">
-              Sign up
-            </a>
-          </p>
-        </div>
+        {/* SignUp Link */}
+        <p className="mt-6 text-center text-sm ">
+          Not a member?{' '}
+          <a href="./SignUp" className="font-medium text-yellow-500 hover:text-yellow-300">
+            Sign up
+          </a>
+        </p>
       </div>
     </div>
-    </form>
   )
 }
 
