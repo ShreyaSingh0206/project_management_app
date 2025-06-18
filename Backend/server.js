@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use(cookieParser());
 app.use(cors({
   origin: 'https://project-management-app-coral.vercel.app',
-  credentials: true
+  credentials: true,
 }));
 
 
@@ -67,7 +67,7 @@ app.post('/SignUp',(req,res) => {
       res.cookie("token",token, {
          httpOnly: true,
          secure: process.env.NODE_ENV === 'production',          // true only in production with HTTPS
-         sameSite: 'lax',
+         sameSite: 'none',
          maxAge: 24 * 60 * 60 * 1000, 
       });
       res.json({ success: true, message: "Account created successfully" })
@@ -90,7 +90,7 @@ app.post('/SignIn', async function (req,res) {
       res.cookie("token",token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',          // true only in production with HTTPS
-        sameSite: 'lax',
+        sameSite: 'none',
         maxAge: 24 * 60 * 60 * 1000,
       });
       res.json({ success: true, message: "Signed in successfully" })
@@ -102,7 +102,7 @@ app.post('/SignIn', async function (req,res) {
 app.post('/logout', (req, res)=> {
   res.clearCookie('token', {
     httpOnly: true,
-    sameSite: 'Lax', // or 'None' if using cross-site requests with HTTPS
+    sameSite: 'none', // or 'None' if using cross-site requests with HTTPS
     secure: process.env.NODE_ENV === 'production',
   });
   res.status(200).json({ message: 'Logged out successfully' });
