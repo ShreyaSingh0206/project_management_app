@@ -148,14 +148,14 @@ const SignUp = () => {
 
     <div
       className="min-h-screen flex items-center justify-center bg-cover bg-center px-4"
-      style={{ backgroundImage: "url('/src/assets/pexels-codioful-6985048.jpg')" }} // Replace with your image
+      style={{ backgroundImage: "url('/pexels-codioful-6985048.jpg')" }} // Replace with your image
     >
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-md bg-white/10 backdrop-blur-md border border-white/30 text-white p-8 rounded-xl shadow-2xl"
       >
         <div className="text-center flex flex-col items-center ">
-          <img  src="/src/assets/only_logo.png" alt="image error" srcset="" width='75px'/>
+          <img  src="/only_logo.png" alt="image error" srcset="" width='75px'/>
           <h2 className="text-3xl font-bold mb-8">Create your account</h2>
         </div>
 
