@@ -26,7 +26,7 @@ const UpdateForm = ({ task, projectId, teamMembers = [], onClose, onUpdate }) =>
  useEffect(() => {
   if (teamMembers.length === 0 && projectId) {
     axios
-      .get(`http://localhost:3000/api/projects/${projectId}/team`, { withCredentials: true }) 
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/projects/${projectId}/team`, { withCredentials: true }) 
       .then(res => {
         setFetchedMembers(res.data.teamMembers);
         setAssigneeList(res.data.teamMembers); // ✅ update list

@@ -24,7 +24,7 @@ const ProjectList = ({ onOpenCreateTask, selectedProject, tasks, setTasks }) => 
    const fetchTasks = async () => {
      if (!selectedProject?._id) return;
   try {
-    const res = await axios.get(`http://localhost:3000/api/tasks?projectId=${selectedProject._id}`, {
+    const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/tasks?projectId=${selectedProject._id}`, {
       withCredentials: true
     });
     setTasks(res.data);
@@ -42,7 +42,7 @@ const handleEditClick = (task) => {
 
 const handleTaskUpdate = async (updatedTask) => {
   try {
-    const res = await axios.put(`http://localhost:3000/api/tasks/${updatedTask._id}`, updatedTask,
+    const res = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/tasks/${updatedTask._id}`, updatedTask,
       {
         withCredentials: true
       }
@@ -59,7 +59,7 @@ const handleTaskUpdate = async (updatedTask) => {
   
    const deleteTask = async (taskId) => {
   try {
-    await axios.delete(`http://localhost:3000/api/tasks/${taskId}`,
+    await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/tasks/${taskId}`,
       {
         withCredentials: true
       }
@@ -78,7 +78,7 @@ const handleDeleteClick = (task) => {
 const confirmDelete = async () => {
   if (!taskToDelete) return;
   try {
-    await axios.delete(`http://localhost:3000/api/tasks/${taskToDelete._id}`,
+    await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/tasks/${taskToDelete._id}`,
       {
         withCredentials: true
       }
@@ -107,7 +107,7 @@ useEffect(() => {
   }, [selectedProject?._id]);
   
    useEffect(() => {
-    axios.get('http://localhost:3000/api/projects', { withCredentials: true })
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/projects`, { withCredentials: true })
       .then(res => {
         setProjects(res.data);
       })
@@ -121,7 +121,7 @@ useEffect(() => {
 
   const fetchTeamMembers = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/projects/${selectedProject._id}`,
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/projects/${selectedProject._id}`,
         { withCredentials: true }
       );
       setTeamMembers(res.data.teamMembers || []);

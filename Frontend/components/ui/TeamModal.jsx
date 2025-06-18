@@ -10,7 +10,7 @@ const TeamModal = ({ projectId, onClose }) => {
   useEffect(() => {
     const fetchTeamMembers = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/projects/${projectId}`, 
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/projects/${projectId}`, 
           { withCredentials: true } // Ensure cookies are sent for authentication
         );
         console.log('Fetched team members:', response.data.teamMembers); 
@@ -25,7 +25,7 @@ const TeamModal = ({ projectId, onClose }) => {
 
   const handleInvite = async () => {
     try {
-      const res = await axios.post(`http://localhost:3000/api/projects/${projectId}/team/add`, { email },
+      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/projects/${projectId}/team/add`, { email },
         { withCredentials: true } // Ensure cookies are sent for authentication
       );
       setTeam(res.data.team);

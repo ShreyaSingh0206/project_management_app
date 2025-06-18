@@ -21,7 +21,7 @@ const CreateForm = ({ show, onClose, onProjectCreated }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:3000/api/projects', 
+      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/projects`, 
         {
         title: formData.title,
         summary: formData.summary,

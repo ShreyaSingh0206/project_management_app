@@ -31,7 +31,7 @@ const handleProjectCreated = () => {
 
   const fetchTasks = async (projectId) => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/tasks?projectId=${projectId}`,
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/tasks?projectId=${projectId}`,
         { withCredentials: true }
       );
       setTasks(res.data);

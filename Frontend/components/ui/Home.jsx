@@ -13,7 +13,7 @@ const Home = () => {
         {/* Header */}
         <header className="fixed top-0 w-full z-50 bg-white/30 backdrop-blur-md shadow-md border-b border-white/20">
           <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-2">
-            <h1 className="text-3xl font-bold text-indigo-600">  <img className='w-50' src="src/assets/logo.png" alt="error" srcset="" /></h1>
+            <h1 className="text-3xl font-bold text-indigo-600">  <img className='w-50' src="/src/assets/logo.png" alt="error" srcset="" /></h1>
             <nav className="space-x-6">
               <a href="#features" className="hover:text-indigo-600">Features</a>
               <NavLink to="./SignIn" className="hover:text-indigo-600">Go to Dashboard</NavLink>

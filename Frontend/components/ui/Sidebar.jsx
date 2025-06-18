@@ -25,7 +25,7 @@ const Sidebar = ({ onOpenCreateForm, onSelectProject, selectedProject, projectRe
 
   const handleLogout = async () => {
   try {
-    await axios.post('http://localhost:3000/logout', {}, { withCredentials: true });
+    await axios.post(`${import.meta.env.VITE_BACKEND_URL}/logout`, {}, { withCredentials: true });
     navigate('/'); 
   } catch (error) {
     console.error('Logout failed:', error);
@@ -33,7 +33,7 @@ const Sidebar = ({ onOpenCreateForm, onSelectProject, selectedProject, projectRe
 };
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/projects', { withCredentials: true })
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/projects`, { withCredentials: true })
       .then(res => {
         setProjects(res.data);
       })
@@ -72,7 +72,7 @@ const Sidebar = ({ onOpenCreateForm, onSelectProject, selectedProject, projectRe
           </button>
 
           {/* Sidebar content */}
-          <img className='w-45' src="src/assets/logo.png" alt="" />
+          <img className='w-45' src="/src/assets/logo.png" alt="" />
 
           <Button onClick={onOpenCreateForm} className="w-full text-white text-base bg-blue-500 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500">Create Project</Button>
 

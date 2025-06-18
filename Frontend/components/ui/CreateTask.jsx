@@ -19,7 +19,7 @@ const CreateTask = ({ onClose, projectId, onTaskCreated }) => {
   useEffect(() => {
     const fetchTeamMembers = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/projects/${projectId}`,
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/projects/${projectId}`,
           { withCredentials: true }
         );
         setTeamMembers(res.data.teamMembers);
@@ -47,7 +47,7 @@ const CreateTask = ({ onClose, projectId, onTaskCreated }) => {
       projectId,
     };
       console.log("Submitting task with projectId:", projectId);
-      const res = await axios.post('http://localhost:3000/api/tasks', payload, {
+      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/tasks`, payload, {
         withCredentials: true
       });
       console.log("Task created:", res.data);

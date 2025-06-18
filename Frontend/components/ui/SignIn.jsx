@@ -8,7 +8,7 @@ const SignIn = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    let r = await fetch("http://localhost:3000/SignIn", {
+    let r = await fetch(`${import.meta.env.VITE_BACKEND_URL}/SignIn`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -28,11 +28,11 @@ const SignIn = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-cover bg-center" style={{ backgroundImage: "url('src/assets/pexels-codioful-6985048.jpg')" }}>
+    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-cover bg-center" style={{ backgroundImage: "url('/src/assets/pexels-codioful-6985048.jpg')" }}>
       
       <div className="w-full max-w-md space-y-10  p-15      bg-white/10 backdrop-blur-md border border-white/30 text-white  rounded-xl shadow-2xl ">
         <div className='flex flex-col items-center'>
-          <img  src="src/assets/only_logo.png" alt="image error" srcset="" width='75px'/>
+          <img  src="/src/assets/only_logo.png" alt="image error" srcset="" width='75px'/>
           <h2 className="mt-6 text-center text-2xl font-bold ">
             Sign in to your account
           </h2>
