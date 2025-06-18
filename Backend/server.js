@@ -13,12 +13,11 @@ const ticketRoutes = require('./routes/ticket');
 const dashboardRoutes = require('./routes/dashboard');
 const authMiddleware = require('./middleware/authMiddleware');
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000;
 require('dotenv').config();
 
-mongoose.connect('mongodb://localhost:27017/bugtracker',{
-  useNewUrlParser: true,
-  useUnifiedTopology: true
+mongoose.connect(process.env.MONGO_URI,{
+  
 }).then(() => {
   console.log("Connected to MongoDB");
 }).catch((err) => {
@@ -33,9 +32,11 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,'public')));
 app.use(cookieParser());
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: ['http://localhost:5173', 'https://project-management-app-coral.vercel.app'],
   credentials: true
 }));
+
+
 app.use(bodyParser.json())
 
 app.use("/api/projects", authMiddleware, projectRoutes);
