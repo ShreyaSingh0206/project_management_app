@@ -32,7 +32,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,'public')));
 app.use(cookieParser());
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://project-management-app-coral.vercel.app'],
+  origin: 'https://project-management-app-coral.vercel.app',
   credentials: true
 }));
 
