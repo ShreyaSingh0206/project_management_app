@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import {
   DndContext,
   closestCenter,
@@ -100,6 +101,20 @@ const KanbanBoard = ({ projectId, tasks = [], setTasks }) => {
       console.error("Failed to update task status:", err);
     }
   };
+   const fetchTasks = async () => {
+    try {
+      const res = await axios.get(`/api/projects/${projectId}/tasks`, {
+        withCredentials: true,
+      });
+      setTasks(res.data.tasks);
+    } catch (err) {
+      console.error("Failed to fetch tasks:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchTasks();
+  }, [projectId]);
 
   return (
     <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
