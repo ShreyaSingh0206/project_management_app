@@ -29,8 +29,7 @@ const SignIn = () => {
       alert("Signin failed: " + res);
     }
 
-  } catch (err) {
-    alert("Something went wrong: " + err.message);
+  
   } finally {
     setLoading(false); // Stop loading
   }
