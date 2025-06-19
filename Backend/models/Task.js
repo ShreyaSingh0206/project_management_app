@@ -6,7 +6,11 @@ const taskSchema = new mongoose.Schema({
   assignee: String,
   dueDate: Date,
   reporter: String,
-  status: String,
+  status: {
+  type: String,
+  enum: ['Todo', 'InProgress', 'Done'],
+  default: 'Todo'
+},
   assignee: {
   type: mongoose.Schema.Types.ObjectId,
   ref: 'User',
