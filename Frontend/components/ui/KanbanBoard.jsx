@@ -93,7 +93,7 @@ const KanbanBoard = ({ projectId, tasks = [], setTasks }) => {
     );
 
     try {
-      await axios.put(`/api/tickets/${taskId}`, { status: newStatus }, {
+      await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/tickets/${taskId}`, { status: newStatus }, {
         withCredentials: true,
       });
       console.log("Task status updated successfully");
@@ -103,7 +103,7 @@ const KanbanBoard = ({ projectId, tasks = [], setTasks }) => {
   };
    const fetchTasks = async () => {
     try {
-      const res = await axios.get(`/api/tasks?projectId=${projectId}`, {
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/tasks?projectId=${projectId}`, {
         withCredentials: true,
       });
       setTasks(res.data);
