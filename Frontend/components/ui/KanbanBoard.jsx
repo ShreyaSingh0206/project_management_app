@@ -103,10 +103,10 @@ const KanbanBoard = ({ projectId, tasks = [], setTasks }) => {
   };
    const fetchTasks = async () => {
     try {
-      const res = await axios.get(`/api/projects/${projectId}/tasks`, {
+      const res = await axios.get(`/api/tasks?projectId=${projectId}`, {
         withCredentials: true,
       });
-      setTasks(res.data.tasks);
+      setTasks(res.data);
     } catch (err) {
       console.error("Failed to fetch tasks:", err);
     }

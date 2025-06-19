@@ -81,25 +81,7 @@ router.delete('/:id', authMiddleware, async (req, res) => {
   }
 });
 
-router.get('/', async (req, res) => {
-  const { search } = req.query;
 
-  const query = search
-    ? {
-        $or: [
-          { title: { $regex: search, $options: 'i' } },
-          { summary: { $regex: search, $options: 'i' } }
-        ]
-      }
-    : {};
-
-  try {
-    const tasks = await Task.find(query);
-    res.json(tasks);
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch tasks' });
-  }
-});
 
 
 module.exports = router;
