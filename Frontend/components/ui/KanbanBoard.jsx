@@ -103,7 +103,7 @@ const KanbanBoard = ({ projectId, tasks = [], setTasks }) => {
   };
    const fetchTasks = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/tasks?projectId=${projectId}`, {
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/tickets/projectId=${projectId}`, {
         withCredentials: true,
       });
       setTasks(res.data);
