@@ -3,11 +3,15 @@ import { Form, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
+  const [loading, setLoading] = useState(false);
+
 
   const { register, handleSubmit, watch, setError, formState: { errors }, } = useForm();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
+     setLoading(true);
+    try {
     let r = await fetch(`${import.meta.env.VITE_BACKEND_URL}/SignIn`, {
       method: "POST",
       headers: {
@@ -25,7 +29,12 @@ const SignIn = () => {
       alert("Signin failed: " + res);
     }
 
+  } catch (err) {
+    alert("Something went wrong: " + err.message);
+  } finally {
+    setLoading(false); // Stop loading
   }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-cover bg-center" style={{ backgroundImage: "url('/pexels-codioful-6985048.jpg')" }}>
@@ -84,13 +93,31 @@ const SignIn = () => {
           {/* Submit Button */}
           <div>
             <button
-              type="submit"
-              value="submit"
-              
-              className="w-full flex justify-center py-2 px-4 rounded-md bg-indigo-500 hover:bg-indigo-400 text-white font-semibold shadow-lg"
-            >
-              Sign in
-            </button>
+  type="submit"
+  disabled={loading}
+  className={`w-full flex justify-center items-center py-2 px-4 rounded-md font-semibold shadow-lg transition ${
+    loading
+      ? "bg-indigo-300 cursor-not-allowed"
+      : "bg-indigo-500 hover:bg-indigo-400 text-white"
+  }`}
+>
+  {loading ? (
+    <span className="flex items-center gap-2">
+      <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="white" strokeWidth="4" fill="none" />
+        <path
+          className="opacity-75"
+          fill="white"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+        />
+      </svg>
+      Signing in...
+    </span>
+  ) : (
+    "Sign in"
+  )}
+</button>
+
           </div>
         </form>
 
