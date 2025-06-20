@@ -95,7 +95,7 @@ const SignIn = () => {
               type="submit"
               value="submit"
               className="w-full flex justify-center py-2 px-4 rounded-md bg-indigo-500 hover:bg-indigo-400 text-white font-semibold shadow-lg"
-              disabled={loading}
+              disabled={loading} 
             >
               {loading ? "Signing in..." : "Sign in"}
             </button>
@@ -105,7 +105,7 @@ const SignIn = () => {
         {/* SignUp Link */}
         <p className="mt-6 text-center text-sm ">
           Not a member?{' '}
-          <Link to="./SignUp" className="font-medium text-yellow-500 hover:text-yellow-300">
+          <Link to="/SignUp" className="font-medium text-yellow-500 hover:text-yellow-300">
             Sign up
           </Link>
         </p>
