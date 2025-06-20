@@ -1,14 +1,18 @@
 import React from 'react';
 import { Form, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const SignIn = () => {
 
-
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit, watch, setError, formState: { errors }, } = useForm();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
+    setLoading(true);
+    try {
     let r = await fetch(`${import.meta.env.VITE_BACKEND_URL}/SignIn`, {
       method: "POST",
       headers: {
@@ -26,7 +30,12 @@ const SignIn = () => {
       alert("Signin failed: " + res);
     }
 
+  }catch (err) {
+    alert("Something went wrong.");
+  } finally {
+    setLoading(false); // Stop loader
   }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-cover bg-center" style={{ backgroundImage: "url('/pexels-codioful-6985048.jpg')" }}>
@@ -64,9 +73,7 @@ const SignIn = () => {
                 <label htmlFor="password" className="block text-sm font-medium">
                   Password
                 </label>
-                <a href="#" className="text-sm font-medium text-orange-400 hover:text-orange-500">
-                  Forgot password?
-                </a>
+               
               </div>
               <input
                 {...register("password", { required: { value: true, message: "This field is required" } })}
@@ -87,10 +94,10 @@ const SignIn = () => {
             <button
               type="submit"
               value="submit"
-              
               className="w-full flex justify-center py-2 px-4 rounded-md bg-indigo-500 hover:bg-indigo-400 text-white font-semibold shadow-lg"
+              disabled={loading}
             >
-              Sign in
+              {loading ? "Signing in..." : "Sign in"}
             </button>
           </div>
         </form>
@@ -98,9 +105,9 @@ const SignIn = () => {
         {/* SignUp Link */}
         <p className="mt-6 text-center text-sm ">
           Not a member?{' '}
-          <a href="./SignUp" className="font-medium text-yellow-500 hover:text-yellow-300">
+          <Link to="./SignUp" className="font-medium text-yellow-500 hover:text-yellow-300">
             Sign up
-          </a>
+          </Link>
         </p>
       </div>
     </div>
